@@ -8,7 +8,7 @@ export async function authenticate(
   reply: FastifyReply,
 ) {
   const authenticateBodySchema = z.object({
-    email: z.string().email(),
+    email: z.email(),
     password: z.string().min(6),
   })
 
@@ -56,7 +56,8 @@ export async function authenticate(
       .send({
         token,
       })
-  } catch (err) {
+  }
+  catch (err) {
     if (err instanceof InvalidCredentialsError) {
       return reply.status(400).send({ message: err.message })
     }

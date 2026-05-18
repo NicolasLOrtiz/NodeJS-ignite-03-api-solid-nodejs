@@ -1,10 +1,10 @@
-import fastifyJwt from '@fastify/jwt'
 import fastifyCookie from '@fastify/cookie'
+import fastifyJwt from '@fastify/jwt'
 import fastify from 'fastify'
 import { ZodError } from 'zod'
 import { env } from '@/env'
-import { usersRoutes } from '@/http/controllers/users/routes'
 import { gymsRoutes } from '@/http/controllers/gyms/routes'
+import { usersRoutes } from '@/http/controllers/users/routes'
 import { checkInsRoutes } from './http/controllers/check-ins/routes'
 
 export const app = fastify()
@@ -35,7 +35,8 @@ app.setErrorHandler((error, _, reply) => {
 
   if (env.NODE_ENV !== 'production') {
     console.error(error)
-  } else {
+  }
+  else {
     // TODO: Here we should log to a external tool like DataDog/NewRelic/Sentry
   }
 

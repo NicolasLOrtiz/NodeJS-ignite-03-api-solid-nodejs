@@ -1,7 +1,7 @@
-import { prisma } from '@/lib/prisma'
 import { hash } from 'bcryptjs'
 import { FastifyInstance } from 'fastify'
 import request from 'supertest'
+import { prisma } from '@/lib/prisma'
 
 export async function createAndAuthenticateUser(
   app: FastifyInstance,

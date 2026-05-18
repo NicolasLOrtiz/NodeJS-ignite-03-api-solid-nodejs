@@ -17,9 +17,9 @@ export function getDistanceBetweenCoordinates(
   const theta = from.longitude - to.longitude
   const radTheta = (Math.PI * theta) / 180
 
-  let dist =
-    Math.sin(fromRadian) * Math.sin(toRadian) +
-    Math.cos(fromRadian) * Math.cos(toRadian) * Math.cos(radTheta)
+  let dist
+    = Math.sin(fromRadian) * Math.sin(toRadian)
+      + Math.cos(fromRadian) * Math.cos(toRadian) * Math.cos(radTheta)
 
   if (dist > 1) {
     dist = 1

@@ -1,16 +1,16 @@
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { Prisma } from '@/generated/prisma/client'
 import { InMemoryCheckInsRepository } from '@/repositories/in-memory/in-memory-check-ins-repository'
-import { expect, describe, it, beforeEach, vi, afterEach } from 'vitest'
-import { CheckInUseCase } from '@/use-cases/check-in'
 import { InMemoryGymsRepository } from '@/repositories/in-memory/in-memory-gyms-repository'
-import { Decimal } from '@prisma/client/runtime/library'
-import { MaxNumberOfCheckInsError } from '@/use-cases/errors/max-number-of-check-ins-error'
+import { CheckInUseCase } from '@/use-cases/check-in'
 import { MaxDistanceError } from '@/use-cases/errors/max-distance-error'
+import { MaxNumberOfCheckInsError } from '@/use-cases/errors/max-number-of-check-ins-error'
 
 let checkInsRepository: InMemoryCheckInsRepository
 let gymsRepository: InMemoryGymsRepository
 let sut: CheckInUseCase
 
-describe('Check-in Use Case', () => {
+describe('check-in Use Case', () => {
   beforeEach(async () => {
     checkInsRepository = new InMemoryCheckInsRepository()
     gymsRepository = new InMemoryGymsRepository()
@@ -91,8 +91,8 @@ describe('Check-in Use Case', () => {
       title: 'JavaScript Gym',
       description: '',
       phone: '',
-      latitude: new Decimal(-27.0747279),
-      longitude: new Decimal(-49.4889672),
+      latitude: new Prisma.Decimal(-27.0747279),
+      longitude: new Prisma.Decimal(-49.4889672),
     })
 
     await expect(() =>
