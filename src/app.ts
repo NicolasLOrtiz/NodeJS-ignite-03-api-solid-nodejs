@@ -1,6 +1,13 @@
 import fastifyCookie from '@fastify/cookie'
 import fastifyJwt from '@fastify/jwt'
+import fastifySwagger from '@fastify/swagger'
+import fastifyApiReference from '@scalar/fastify-api-reference'
 import fastify from 'fastify'
+import {
+  jsonSchemaTransform,
+  serializerCompiler,
+  validatorCompiler,
+} from 'fastify-type-provider-zod'
 import { ZodError } from 'zod'
 import { env } from '@/env'
 import { gymsRoutes } from '@/http/controllers/gyms/routes'
@@ -8,6 +15,38 @@ import { usersRoutes } from '@/http/controllers/users/routes'
 import { checkInsRoutes } from './http/controllers/check-ins/routes'
 
 export const app = fastify()
+
+app.setValidatorCompiler(validatorCompiler)
+app.setSerializerCompiler(serializerCompiler)
+
+app.register(fastifySwagger, {
+  openapi: {
+    info: {
+      title: 'GymPass API',
+      description: 'API for GymPass style application.',
+      version: '1.0.0',
+    },
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: 'http',
+          scheme: 'bearer',
+          bearerFormat: 'JWT',
+        },
+      },
+    },
+  },
+  transform: jsonSchemaTransform,
+})
+
+app.register(fastifyApiReference, {
+  routePrefix: '/docs',
+  configuration: {
+    spec: {
+      content: () => app.swagger(),
+    },
+  },
+})
 
 app.register(fastifyJwt, {
   secret: env.JWT_SECRET,
