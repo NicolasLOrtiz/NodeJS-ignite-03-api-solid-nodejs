@@ -83,14 +83,25 @@ npx prisma migrate dev
   ```
   *(O Prisma Studio abrirá por padrão em http://localhost:51212, permitindo que você visualize, crie e edite registros no banco de dados de maneira totalmente visual)*
 
-### 5. Rodando a Aplicação
+### 5. Populando o Banco com Dados Fictícios (Seed)
+Para facilitar o desenvolvimento e testes manuais da API, você pode preencher o banco de dados com dados fictícios gerados de forma automática (contendo usuários, administradores, academias e histórico de check-ins) usando o mecanismo de seed:
+```bash
+npx prisma db seed
+```
+*(Nota: O Prisma executará esse script de seed automaticamente sempre que o banco de dados for resetado via `npx prisma migrate reset`)*
+
+#### Credenciais Criadas no Seed:
+- **Administrador:** `admin@gympass.com` | Senha: `123456`
+- **Membro Comum:** `member@gympass.com` | Senha: `123456`
+
+### 6. Rodando a Aplicação
 Inicie o servidor de desenvolvimento:
 ```bash
 npm run start:dev
 ```
 A API estará rodando por padrão em `http://localhost:3333`.
 
-### 6. Executando os Testes Automatizados
+### 7. Executando os Testes Automatizados
 O projeto conta com uma robusta suíte de testes unitários e de integração (E2E):
 
 - **Executar testes unitários:**
@@ -118,7 +129,7 @@ O projeto conta com uma robusta suíte de testes unitários e de integração (E
   npm run test:ui
   ```
 
-### 7. Linting do Código
+### 8. Linting do Código
 - **Verificar erros de padronização:**
   ```bash
   npm run lint
