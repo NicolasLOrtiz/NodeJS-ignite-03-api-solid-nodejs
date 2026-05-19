@@ -8,7 +8,7 @@ import {
   serializerCompiler,
   validatorCompiler,
 } from 'fastify-type-provider-zod'
-import { ZodError } from 'zod'
+import { treeifyError, ZodError } from 'zod'
 import { env } from '@/env'
 import { gymsRoutes } from '@/http/controllers/gyms/routes'
 import { usersRoutes } from '@/http/controllers/users/routes'
@@ -69,7 +69,7 @@ app.setErrorHandler((error, _, reply) => {
   if (error instanceof ZodError) {
     return reply
       .status(400)
-      .send({ message: 'Validation error.', issues: error.format() })
+      .send({ message: 'Validation error.', issues: treeifyError(error) })
   }
 
   if (env.NODE_ENV !== 'production') {
