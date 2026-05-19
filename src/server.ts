@@ -7,5 +7,6 @@ app
     port: env.PORT,
   })
   .then(() => {
-    console.log('🚀 HTTP Server Running!')
+    console.log(`🚀 HTTP Server Running! on port ${env.PORT}`)
+    console.log(`Scalar API Reference: http://localhost:${env.PORT}/docs`)
   })
